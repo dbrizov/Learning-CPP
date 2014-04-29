@@ -17,12 +17,22 @@ public:
 	Vector3();
 	Vector3(float x, float y, float z);
 
-	static float Dot(const Vector3& v1, const Vector3& v2);
-	static Vector3 Cross(const Vector3& v1, const Vector3& v2);
+	static float Dot(const Vector3& lhs, const Vector3& rhs);
+	static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
 
 	float Magnitude();
 	Vector3 Normalized();
 	string ToString();
+	float* ToFloatArray();
+	operator float*();
+	Vector3 operator+(const Vector3& rhs);
+	Vector3 operator-(const Vector3& rhs);
+	Vector3 operator*(float scalar);
+	Vector3 operator/(float scalar);
+	bool operator==(const Vector3& rhs);
+	bool operator!=(const Vector3& rhs);
 };
+
+Vector3 operator*(float scalar, const Vector3& vector);
 
 #endif // VECTOR3_H

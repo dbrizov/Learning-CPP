@@ -19,17 +19,17 @@ Vector3::Vector3(float x, float y, float z)
 	this->z = z;
 }
 
-float Vector3::Dot(const Vector3& v1, const Vector3& v2)
+float Vector3::Dot(const Vector3& lhs, const Vector3& rhs)
 {
-	float dotProduct = (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
+	float dotProduct = (lhs.x * rhs.x) + (lhs.y * rhs.y) + (lhs.z * rhs.z);
 	return dotProduct;
 }
 
-Vector3 Vector3::Cross(const Vector3& v1, const Vector3& v2)
+Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs)
 {
-	float x = (v1.y * v2.z) - (v1.z * v2.y);
-	float y = (v1.z * v2.x) - (v1.x * v2.z);
-	float z = (v1.x * v2.y) - (v1.y * v2.x);
+	float x = (lhs.y * rhs.z) - (lhs.z * rhs.y);
+	float y = (lhs.z * rhs.x) - (lhs.x * rhs.z);
+	float z = (lhs.x * rhs.y) - (lhs.y * rhs.x);
 
 	return Vector3(x, y, z);
 }
@@ -65,4 +65,80 @@ string Vector3::ToString()
 	delete buffer;
 
 	return result;
+}
+
+float* Vector3::ToFloatArray()
+{
+	return &(this->x);
+}
+
+Vector3::operator float *()
+{
+	return this->ToFloatArray();
+}
+
+Vector3 Vector3::operator+(const Vector3& rhs)
+{
+	Vector3 result;
+	result.x = this->x + rhs.x;
+	result.y = this->y + rhs.y;
+	result.z = this->z + rhs.z;
+
+	return result;
+}
+
+Vector3 Vector3::operator-(const Vector3& rhs)
+{
+	Vector3 result;
+	result.x = this->x - rhs.x;
+	result.y = this->y - rhs.y;
+	result.z = this->z - rhs.z;
+
+	return result;
+}
+
+Vector3 Vector3::operator*(float scalar)
+{
+	Vector3 result;
+	result.x = this->x * scalar;
+	result.y = this->y * scalar;
+	result.z = this->z * scalar;
+
+	return result;
+}
+
+Vector3 Vector3::operator/(float scalar)
+{
+	Vector3 result;
+	result.x = this->x / scalar;
+	result.y = this->y / scalar;
+	result.z = this->z / scalar;
+
+	return result;
+}
+
+Vector3 operator*(float scalar, const Vector3& vector)
+{
+	Vector3 result;
+	result.x = vector.x * scalar;
+	result.y = vector.y * scalar;
+	result.z = vector.z * scalar;
+
+	return result;
+}
+
+bool Vector3::operator==(const Vector3& rhs)
+{
+	bool areEqual =
+		this->x == rhs.x &&
+		this->y == rhs.y &&
+		this->z == rhs.z;
+
+	return areEqual;
+}
+
+bool Vector3::operator!=(const Vector3& rhs)
+{
+	bool notEqual = !(*this == rhs);
+	return notEqual;
 }
