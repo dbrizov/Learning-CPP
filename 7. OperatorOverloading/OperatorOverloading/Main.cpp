@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Vector3.h"
 #include "String.h"
+#include "RationalNumber.h"
 
 using namespace std;
 

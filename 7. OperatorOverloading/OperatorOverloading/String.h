@@ -17,6 +17,7 @@ public:
 	char& operator[](int index);
 
 	int Length();
+
 private:
 	char* data;
 	int length;
