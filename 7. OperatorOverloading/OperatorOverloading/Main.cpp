@@ -58,26 +58,28 @@ int main()
 	// -- Vector 3 --
 	cout << "-- Vector3 --" << endl;
 
-	Vector3 vector(1, 2, 3);
+	Vector3 vector1(1, 2, 3);
 	Vector3 vector2(5, 6, 7);
 	Vector3 vector3(5, 6, 7);
 
-	cout << "v1 = " << vector.ToString() << endl;
+	cout << "v1 = " << vector1.ToString() << endl;
 	cout << "v2 = " << vector2.ToString() << endl;
 	cout << "v3 = " << vector3.ToString() << endl;
 	cout << endl;
 
-	cout << "v1 + v2 = " << (vector + vector2).ToString() << endl;
-	cout << "v1 - v2 = " << (vector - vector2).ToString() << endl;
-	cout << "v2 + v1 = " << (vector2 + vector).ToString() << endl;
-	cout << "v2 - v1 = " << (vector2 - vector).ToString() << endl;
-	cout << "v1 * 10.0f = " << (vector * 10.0f).ToString() << endl;
-	cout << "10.0f * v1 = " << (10.0f * vector).ToString() << endl;
-	cout << "v1 / 10.0f = " << (vector / 10.0f).ToString() << endl;
-	cout << "v1 == v2: " << (vector == vector2) << endl;
+	cout << "v1 + v2 = " << (vector1 + vector2).ToString() << endl;
+	cout << "v1 - v2 = " << (vector1 - vector2).ToString() << endl;
+	cout << "v2 + v1 = " << (vector2 + vector1).ToString() << endl;
+	cout << "v2 - v1 = " << (vector2 - vector1).ToString() << endl;
+	cout << "v1 * 10.0f = " << (vector1 * 10.0f).ToString() << endl;
+	cout << "10.0f * v1 = " << (10.0f * vector1).ToString() << endl;
+	cout << "v1 / 10.0f = " << (vector1 / 10.0f).ToString() << endl;
+	cout << "v1 == v2: " << (vector1 == vector2) << endl;
 	cout << "v2 == v3: " << (vector2 == vector3) << endl;
-	cout << "v1 != v2: " << (vector != vector2) << endl;
-	cout << "v2 != v3: " << (vector2 != vector3) << endl << endl;
+	cout << "v1 != v2: " << (vector1 != vector2) << endl;
+	cout << "v2 != v3: " << (vector2 != vector3) << endl;
+	cout << "Dot(v1, v2) = " << Vector3::Dot(vector1, vector2) << endl;
+	cout << "Cross(v1, v2) = " << Vector3::Cross(vector1, vector2).ToString() << endl << endl;
 
 	// -- IntList --
 	cout << "-- IntList --" << endl;
