@@ -2,12 +2,34 @@
 #include "Vector3.h"
 #include "String.h"
 #include "RationalNumber.h"
+#include "DivideByZeroException.h"
 
 using namespace std;
 
 int main()
 {
 	cout.setf(ios::boolalpha);
+
+	try
+	{
+		RationalNumber rat1(2, 4);
+		RationalNumber rat2(3, 4);
+
+		cout << "rat1 = " << rat1.ToString() << endl;
+		cout << "rat2 = " << rat2.ToString() << endl;
+		cout << "(float)rat1 = " << (float) rat1 << endl;
+		cout << "(double)rat2 = " << (double) rat2 << endl;
+		cout << endl;
+
+		cout << "rat1 + rat2 = " << (rat1 + rat2).ToString() << endl;
+		cout << "rat1 - rat2 = " << (rat1 - rat2).ToString() << endl;
+		cout << "rat1 * rat2 = " << (rat1 * rat2).ToString() << endl;
+		cout << "rat1 / rat2 = " << (rat1 / rat2).ToString() << endl;
+	}
+	catch (DivideByZeroException& ex)
+	{
+		cout << ex.GetMessage() << endl;
+	}
 
 	//Vector3 vector(1, 2, 3);
 	//Vector3 vector2(5, 6, 7);
