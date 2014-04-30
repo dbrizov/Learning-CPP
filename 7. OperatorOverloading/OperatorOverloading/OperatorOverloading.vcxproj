@@ -79,6 +79,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DivideByZeroException.cpp" />
+    <ClCompile Include="IndexOutOfRangeException.cpp" />
+    <ClCompile Include="IntList.cpp" />
     <ClCompile Include="RationalNumber.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="String.cpp" />
@@ -86,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DivideByZeroException.h" />
+    <ClInclude Include="IndexOutOfRangeException.h" />
+    <ClInclude Include="IntList.h" />
     <ClInclude Include="RationalNumber.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="Vector3.h" />

@@ -11,16 +11,16 @@ public:
 	RationalNumber();
 	RationalNumber(int numerator, int denominator);
 
-	RationalNumber operator+(RationalNumber other);
-	RationalNumber operator-(RationalNumber other);
-	RationalNumber operator*(RationalNumber other);
-	RationalNumber operator/(RationalNumber other);
-	bool operator==(RationalNumber other);
-	bool operator!=(RationalNumber other);
-	bool operator<(RationalNumber other);
-	bool operator>(RationalNumber other);
-	bool operator<=(RationalNumber other);
-	bool operator>=(RationalNumber other);
+	RationalNumber operator+(const RationalNumber& other);
+	RationalNumber operator-(const RationalNumber& other);
+	RationalNumber operator*(const RationalNumber& other);
+	RationalNumber operator/(const RationalNumber& other);
+	bool operator==(const RationalNumber& other);
+	bool operator!=(const RationalNumber& other);
+	bool operator<(const RationalNumber& other);
+	bool operator>(const RationalNumber& other);
+	bool operator<=(const RationalNumber& other);
+	bool operator>=(const RationalNumber& other);
 	operator float();
 	operator double();
 
@@ -31,7 +31,8 @@ private:
 	int denominator;
 
 	static int FindGreatestCommonDivisor(int number1, int number2);
-	static void Reduce(RationalNumber& rational);
+
+	void Reduce();
 };
 
 #endif // RATIONAL_NUMBER_H

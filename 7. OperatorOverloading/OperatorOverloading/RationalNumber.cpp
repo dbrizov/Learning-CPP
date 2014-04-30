@@ -19,43 +19,43 @@ RationalNumber::RationalNumber(int numerator, int denominator)
 	this->numerator = numerator;
 	this->denominator = denominator;
 
-	RationalNumber::Reduce(*this);
+	this->Reduce();
 }
 
-RationalNumber RationalNumber::operator+(RationalNumber other)
+RationalNumber RationalNumber::operator+(const RationalNumber& other)
 {
 	RationalNumber result;
 	result.numerator = this->numerator * other.denominator + other.numerator * this->denominator;
 	result.denominator = this->denominator * other.denominator;
 
-	RationalNumber::Reduce(result);
+	result.Reduce();
 
 	return result;
 }
 
-RationalNumber RationalNumber::operator-(RationalNumber other)
+RationalNumber RationalNumber::operator-(const RationalNumber& other)
 {
 	RationalNumber result;
 	result.numerator = this->numerator * other.denominator - other.numerator * this->denominator;
 	result.denominator = this->denominator * other.denominator;
 
-	RationalNumber::Reduce(result);
+	result.Reduce();
 
 	return result;
 }
 
-RationalNumber RationalNumber::operator*(RationalNumber other)
+RationalNumber RationalNumber::operator*(const RationalNumber& other)
 {
 	RationalNumber result;
 	result.numerator = this->numerator * other.numerator;
 	result.denominator = this->denominator * other.denominator;
 
-	RationalNumber::Reduce(result);
+	result.Reduce();
 
 	return result;
 }
 
-RationalNumber RationalNumber::operator/(RationalNumber other)
+RationalNumber RationalNumber::operator/(const RationalNumber& other)
 {
 	if (other.numerator == 0)
 	{
@@ -66,9 +66,49 @@ RationalNumber RationalNumber::operator/(RationalNumber other)
 	result.numerator = this->numerator * other.denominator;
 	result.denominator = this->denominator * other.numerator;
 
-	RationalNumber::Reduce(result);
+	result.Reduce();
 
 	return result;
+}
+
+bool RationalNumber::operator==(const RationalNumber& other)
+{
+	bool areEqual =
+		this->numerator == other.numerator &&
+		this->denominator == other.denominator;
+
+	return areEqual;
+}
+
+bool RationalNumber::operator!=(const RationalNumber& other)
+{
+	return !(*this == other);
+}
+
+bool RationalNumber::operator<(const RationalNumber& other)
+{
+	float thisAsFloat = (float) (*this);
+	float otherAsFloat = (float) other.numerator / other.denominator;
+
+	return thisAsFloat < otherAsFloat;
+}
+
+bool RationalNumber::operator>(const RationalNumber& other)
+{
+	float thisAsFloat = (float) (*this);
+	float otherAsFloat = (float) other.numerator / other.denominator;
+
+	return thisAsFloat > otherAsFloat;
+}
+
+bool RationalNumber::operator<=(const RationalNumber& other)
+{
+	return !(*this > other);
+}
+
+bool RationalNumber::operator>=(const RationalNumber& other)
+{
+	return !(*this < other);
 }
 
 RationalNumber::operator float()
@@ -118,9 +158,9 @@ int RationalNumber::FindGreatestCommonDivisor(int number1, int number2)
 	return number1;
 }
 
-void RationalNumber::Reduce(RationalNumber& rational)
+void RationalNumber::Reduce()
 {
-	int gcd = RationalNumber::FindGreatestCommonDivisor(rational.numerator, rational.denominator);
-	rational.numerator /= gcd;
-	rational.denominator /= gcd;
+	int gcd = RationalNumber::FindGreatestCommonDivisor(this->numerator, this->denominator);
+	this->numerator /= gcd;
+	this->denominator /= gcd;
 }
