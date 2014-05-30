@@ -93,6 +93,7 @@ public:
 int main()
 {
 	cout << "-- FUNCTORS USAGE --" << endl;
+
 	srand(time(0));
 
 	vector<int> vec;
@@ -152,8 +153,8 @@ int main()
 
 	// -- Some set operations --
 	cout << "-- SET --" << endl;
-	set<Person, PersonComparer> mySet; // Use custom comparer
 
+	set<Person, PersonComparer> mySet; // Use custom comparer
 	Person* p1 = new Person("Denis", 4);
 	Person* p2 = new Person("Meri", 1);
 	Person* p3 = new Person("Kriso", 3);
