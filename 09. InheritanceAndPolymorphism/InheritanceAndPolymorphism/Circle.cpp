@@ -7,6 +7,10 @@ Circle::Circle(float radius)
 	this->radius = radius;
 }
 
+Circle::~Circle()
+{
+}
+
 string Circle::GetType()
 {
 	return "Circle";

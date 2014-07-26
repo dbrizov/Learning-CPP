@@ -7,10 +7,11 @@ class Rectangle : public IShape
 {
 public:
 	Rectangle(float width, float height);
+	virtual ~Rectangle();
 
-	string GetType();
-	float GetArea();
-	float GetPerimeter();
+	virtual string GetType();
+	virtual float GetArea();
+	virtual float GetPerimeter();
 
 private:
 	float width;

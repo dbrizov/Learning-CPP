@@ -7,10 +7,11 @@ class Circle : public IShape
 {
 public:
 	Circle(float radius);
+	virtual ~Circle();
 
-	string GetType();
-	float GetArea();
-	float GetPerimeter();
+	virtual string GetType();
+	virtual float GetArea();
+	virtual float GetPerimeter();
 
 private:
 	float radius;

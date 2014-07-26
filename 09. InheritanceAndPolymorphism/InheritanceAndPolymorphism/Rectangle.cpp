@@ -6,6 +6,10 @@ Rectangle::Rectangle(float width, float height)
 	this->height = height;
 }
 
+Rectangle::~Rectangle()
+{
+}
+
 string Rectangle::GetType()
 {
 	return "Rectangle";
