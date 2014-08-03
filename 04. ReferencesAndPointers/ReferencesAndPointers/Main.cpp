@@ -14,10 +14,10 @@ typedef void(*Action)(); // Pointer to void function with no paramenters
 /** Returns a random integer in range [from, to) */
 int Random(int from, int to);
 
-/** Returns two random dies */
+/** Returns random dice */
 void ThrowDice(int& die1, int& die2);
 
-/** Returns two random dies */
+/** Returns random dice */
 void ThrowDice(int* die1, int* die2);
 
 void RandomArrayFill(int* arr, int size);
