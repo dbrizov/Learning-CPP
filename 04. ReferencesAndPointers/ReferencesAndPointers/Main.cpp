@@ -135,14 +135,14 @@ void Sort(int* arr, int length, int(*comparer)(int left, int right))
 	}
 }
 
-int LessCompare(int lhs, int rhs)
+int LessCompare(int left, int right)
 {
-	return lhs - rhs;
+	return left - right;
 }
 
-int GreatCompare(int lhs, int rhs)
+int GreatCompare(int left, int right)
 {
-	return rhs - lhs;
+	return right - left;
 }
 
 void PrintArray(int* arr, int size)
