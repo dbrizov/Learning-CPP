@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
+#include "Person.h";
 
 using namespace std;
 
-typedef int(*Comparer)(int left, int right);
+typedef int(*Comparer)(int left, int right); // Pointer to comparer function
+typedef string(Person::*ToString)() const; // Pointer to ToString member function of class Person
+typedef void (Person::*SetAge)(int age); // Pointer to SetAge member function of class Person
+typedef void(*Action)(); // Pointer to void function with no paramenters
 
 /** Returns a random integer in range [from, to) */
 int Random(int from, int to);
@@ -69,6 +73,7 @@ int main()
 	RandomArrayFill(vec, vecSize);
 
 	PrintVector(vec);
+
 	cout << endl;
 
 	// -- Exercise 3 (Pointer to function) --
@@ -82,7 +87,40 @@ int main()
 	Sort(arr, arrSize, &GreatCompare);
 	PrintArray(arr, arrSize);
 
+	cout << endl;
+
 	delete [] arr;
+
+	// -- Exercise 4 (Pointer to member function) --
+	cout << "-- Exercise 4 (Pointer to member function) --" << endl;
+
+	SetAge setAge = &Person::SetAge; // Initialize a pointer to the SetAge member function of class Person
+	ToString toString = &Person::ToString; // Initialize a pointer to the ToString member function of class Person
+
+	Person* person = new Person("Denis", 22);
+	cout << (person->*toString)() << endl; // Print person via the member function pointer
+
+	(person->*setAge)(30); // Set the age of person via the member function pointer
+
+	cout << (person->*toString)() << endl; // Print person via the member function pointer
+
+	delete person;
+	person = NULL;
+
+	// Without creating the person with the new operator
+	Person person2("Karolina", 20);
+	cout << (person2.*toString)() << endl; // Print person2 via the member function pointer
+
+	(person2.*setAge)(25); // Set the age of person2 via the member function pointer
+
+	cout << (person2.*toString)() << endl << endl; // Print person2 via the member function pointer
+
+	// -- Exercise 5 (Pointer to static function) --
+	cout << "-- Exercise 5 (Pointer to static function) --" << endl;
+
+	Action action = &Person::StaticFunction; // Initialize a pointer to static function
+
+	(*action)(); // Static function pointers are like normal function pointers, because the static function is not a member function
 }
 
 int Random(int from, int to)
