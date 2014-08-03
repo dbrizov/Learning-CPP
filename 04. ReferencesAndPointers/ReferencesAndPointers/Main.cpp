@@ -5,6 +5,8 @@
 
 using namespace std;
 
+typedef int(*Comparer)(int left, int right);
+
 /** Returns a random integer in range [from, to) */
 int Random(int from, int to);
 
@@ -18,7 +20,7 @@ void RandomArrayFill(int* arr, int size);
 
 void RandomArrayFill(vector<int>& vec, int size);
 
-void Sort(int* arr, int length, int(*comparer)(int left, int right));
+void Sort(int* arr, int length, Comparer comparer);
 
 /** Returns:
  * < 0 -> if left < right
@@ -116,14 +118,14 @@ void RandomArrayFill(vector<int>& vec, int size)
 	}
 }
 
-void Sort(int* arr, int length, int(*comparer)(int left, int right))
+void Sort(int* arr, int length, Comparer comparer)
 {
 	for (int i = 0; i < length - 1; i++)
 	{
 		int minIndex = i;
 		for (int j = i + 1; j < length; j++)
 		{
-			if (comparer(arr[j], arr[minIndex]) < 0)
+			if ((*comparer)(arr[j], arr[minIndex]) < 0)
 			{
 				minIndex = j;
 			}
