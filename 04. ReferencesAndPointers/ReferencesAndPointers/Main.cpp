@@ -5,12 +5,37 @@
 
 using namespace std;
 
+/** Returns a random integer in range [from, to) */
 int Random(int from, int to);
+
+/** Returns two random dies */
 void ThrowDice(int& die1, int& die2);
+
+/** Returns two random dies */
 void ThrowDice(int* die1, int* die2);
+
 void RandomArrayFill(int* arr, int size);
+
 void RandomArrayFill(vector<int>& vec, int size);
+
+void Sort(int* arr, int length, int(*comparer)(int left, int right));
+
+/** Returns:
+ * < 0 -> if left < right
+ * 0   -> if left == right
+ * > 0 -> if left > right
+ */
+int LessCompare(int left, int right);
+
+/** Returns:
+* < 0 -> if left > right
+* 0   -> if left == right
+* < 0 -> if left < right
+*/
+int GreatCompare(int left, int right);
+
 void PrintArray(int* arr, int size);
+
 void PrintVector(vector<int> vec);
 
 int main()
@@ -36,13 +61,26 @@ int main()
 	RandomArrayFill(arr, arrSize);
 
 	PrintArray(arr, arrSize);
-	delete [] arr;
 
 	vector<int> vec;
 	int vecSize = 10;
 	RandomArrayFill(vec, vecSize);
 
 	PrintVector(vec);
+	cout << endl;
+
+	// -- Exercise 3 (Pointer to function) --
+	cout << "-- Exercise 3 (Pointer to function) --" << endl;
+
+	cout << "Sorted Ascending" << endl;
+	Sort(arr, arrSize, &LessCompare);
+	PrintArray(arr, arrSize);
+
+	cout << "Sorted Descending" << endl;
+	Sort(arr, arrSize, &GreatCompare);
+	PrintArray(arr, arrSize);
+
+	delete [] arr;
 }
 
 int Random(int from, int to)
@@ -76,6 +114,35 @@ void RandomArrayFill(vector<int>& vec, int size)
 	{
 		vec.push_back(Random(0, 101));
 	}
+}
+
+void Sort(int* arr, int length, int(*comparer)(int left, int right))
+{
+	for (int i = 0; i < length - 1; i++)
+	{
+		int minIndex = i;
+		for (int j = i + 1; j < length; j++)
+		{
+			if (comparer(arr[j], arr[minIndex]) < 0)
+			{
+				minIndex = j;
+			}
+		}
+
+		int temp = arr[i];
+		arr[i] = arr[minIndex];
+		arr[minIndex] = temp;
+	}
+}
+
+int LessCompare(int lhs, int rhs)
+{
+	return lhs - rhs;
+}
+
+int GreatCompare(int lhs, int rhs)
+{
+	return rhs - lhs;
 }
 
 void PrintArray(int* arr, int size)
