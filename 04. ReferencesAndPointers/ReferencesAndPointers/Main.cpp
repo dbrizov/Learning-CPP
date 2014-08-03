@@ -7,8 +7,8 @@
 using namespace std;
 
 typedef int(*Comparer)(int left, int right); // Pointer to comparer function
-typedef string(Person::*ToString)() const; // Pointer to ToString member function of class Person
-typedef void (Person::*SetAge)(int age); // Pointer to SetAge member function of class Person
+typedef string(Person::*ToStringMemberFunction)() const; // Pointer to the ToString member function of class Person (ToStringMemberFunction is the name of the defined type)
+typedef void (Person::*SetAgeMemberFunction)(int age); // Pointer to the SetAge member function of class Person (SetAgeMemberFunction is the name of the defined type)
 typedef void(*Action)(); // Pointer to void function with no paramenters
 
 /** Returns a random integer in range [from, to) */
@@ -94,8 +94,8 @@ int main()
 	// -- Exercise 4 (Pointer to member function) --
 	cout << "-- Exercise 4 (Pointer to member function) --" << endl;
 
-	SetAge setAge = &Person::SetAge; // Initialize a pointer to the SetAge member function of class Person
-	ToString toString = &Person::ToString; // Initialize a pointer to the ToString member function of class Person
+	ToStringMemberFunction toString = &Person::ToString; // Initialize a pointer to the ToString member function of class Person
+	SetAgeMemberFunction setAge = &Person::SetAge; // Initialize a pointer to the SetAge member function of class Person
 
 	Person* person = new Person("Denis", 22);
 	cout << (person->*toString)() << endl; // Print person via the member function pointer
