@@ -73,8 +73,8 @@ void main()
 	// Person does not have a method "float GetGrade() const" - this is another situation
 	GetStringMethodPtr_Const AnotherGetNameMethodPtr_Const = &Student::GetName;
 	//GetStringMethodPtr_Const AnotherToStringMethodPtr_Const = &Student::ToString; // This does not compile, because ToString is virtual and has been overriden.
-																					// Cannot convert from 'std::string (__thiscall Student::* )(void) const' to 'std::string (__thiscall Person::* )(void) const'
-																					// This is the third situation
+	                                                                                // Cannot convert from 'std::string (__thiscall Student::* )(void) const' to 'std::string (__thiscall Person::* )(void) const'
+	                                                                                // This is the third situation
 
 	string* PersonGetNamePtr = (string*&) GetNameMethodPtr_Const; // Pointer to Person::GetName
 	string* StudentGetNamePtr = (string*&) AnotherGetNameMethodPtr_Const; // Pointer to Student::GetName
