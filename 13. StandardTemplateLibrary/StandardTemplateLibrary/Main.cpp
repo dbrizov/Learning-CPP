@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Functors
 class RandomInt
 {
 public:
@@ -32,6 +33,8 @@ template <typename T>
 class DoubleValue
 {
 public:
+	DoubleValue() {};
+
 	void operator()(T& item)
 	{
 		item *= 2;
@@ -42,6 +45,8 @@ template <typename T>
 class Print
 {
 public:
+	Print() {};
+
 	void operator()(const T& item)
 	{
 		cout << item << " ";
@@ -52,6 +57,8 @@ template <typename T>
 class DescendingComparer
 {
 public:
+	DescendingComparer() {};
+
 	bool operator()(const T& leftItem, const T& rightItem)
 	{
 		return leftItem > rightItem;
@@ -61,7 +68,9 @@ public:
 template <typename T>
 class AscendingComparer
 {
-public: 
+public:
+	AscendingComparer() {};
+
 	bool operator()(const T& leftItem, const T& rightItem)
 	{
 		return leftItem < rightItem;
@@ -72,6 +81,8 @@ template <typename T>
 class PrintHashCode
 {
 public:
+	PrintHashCode() {};
+
 	void operator()(const T& item)
 	{
 		cout << item << " -> " << this->hashFunction(item) << endl;
@@ -84,11 +95,34 @@ private:
 class PersonComparer
 {
 public:
+	PersonComparer() {};
+
 	bool operator()(const Person& lhs, const Person& rhs)
 	{
 		return lhs.GetAge() - rhs.GetAge() < 0;
 	}
 };
+
+// Custom algorithm functions
+template<typename TIterator, typename TFunction>
+void Generate(TIterator first, TIterator last, TFunction function)
+{
+	while (first != last)
+	{
+		*first = function();
+		++first;
+	}
+}
+
+template <typename TIterator, typename TFunction>
+void ForEach(TIterator first, TIterator last, TFunction function)
+{
+	while (first != last)
+	{
+		function(*first);
+		++first;
+	}
+}
 
 int main()
 {
@@ -101,21 +135,25 @@ int main()
 
 	// Generate the vector
 	RandomInt randomInt(0, 51);
-	generate(vec.begin(), vec.end(), randomInt);
+	Generate(vec.begin(), vec.end(), randomInt); // Custom generate function
+	//generate(vec.begin(), vec.end(), randomInt); // STL generate function
 
 	// Print it
 	cout << "Generated:" << endl;
 	Print<int> print;
-	for_each(vec.begin(), vec.end(), print);
+	ForEach(vec.begin(), vec.end(), print); // Custom for each function
+	//for_each(vec.begin(), vec.end(), print); // STL for each function
 	cout << endl << endl;
 
 	// Double it's values
 	DoubleValue<int> doubleValue;
-	for_each(vec.begin(), vec.end(), doubleValue);
+	ForEach(vec.begin(), vec.end(), doubleValue);
+	//for_each(vec.begin(), vec.end(), print);
 
 	// Print it
 	cout << "Doubled values:" << endl;
-	for_each(vec.begin(), vec.end(), print);
+	ForEach(vec.begin(), vec.end(), print);
+	//for_each(vec.begin(), vec.end(), print);
 	cout << endl << endl;
 
 	// Reverse it
@@ -123,7 +161,8 @@ int main()
 
 	// Print it
 	cout << "Reversed:" << endl;
-	for_each(vec.begin(), vec.end(), print);
+	ForEach(vec.begin(), vec.end(), print);
+	//for_each(vec.begin(), vec.end(), print);
 	cout << endl << endl;
 
 	// Sort descending
@@ -132,7 +171,8 @@ int main()
 
 	// Print it
 	cout << "Sorted descending:" << endl;
-	for_each(vec.begin(), vec.end(), print);
+	ForEach(vec.begin(), vec.end(), print);
+	//for_each(vec.begin(), vec.end(), print);
 	cout << endl << endl;
 
 	// Sort ascending
@@ -141,13 +181,15 @@ int main()
 
 	// Print it
 	cout << "Sorted ascending:" << endl;
-	for_each(vec.begin(), vec.end(), print);
+	ForEach(vec.begin(), vec.end(), print);
+	//for_each(vec.begin(), vec.end(), print);
 	cout << endl << endl;
 
 	// Print the hash codes of all items
 	cout << "Hash codes of all items:" << endl;
 	PrintHashCode<int> printHashCode;
-	for_each(vec.begin(), vec.end(), printHashCode);
+	ForEach(vec.begin(), vec.end(), printHashCode);
+	//for_each(vec.begin(), vec.end(), print);
 	cout << endl;
 
 
@@ -184,8 +226,8 @@ int main()
 	myMap["Adam"] = 25;
 	myMap["Jennifer"] = 27;
 	myMap["Denis"] = 22;
-	myMap["Kriso"] = 22;
-	
+	myMap["Chris"] = 22;
+
 	for (map<string, int>::iterator i = myMap.begin(); i != myMap.end(); ++i)
 	{
 		cout << "Key = " << i->first << ", ";
