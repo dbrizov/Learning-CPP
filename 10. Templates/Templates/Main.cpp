@@ -3,9 +3,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Table.h"
+#include "Student.h"
 
 using namespace std;
 
+// Template function
 template <typename T>
 void SelectionSort(T* arr, int arrLength)
 {
@@ -27,8 +29,36 @@ void SelectionSort(T* arr, int arrLength)
 	}
 }
 
+// Template constraints
+// For more info: http://www.stroustrup.com/bs_faq2.html#constraints
+template <class TDerived, class TBase>
+struct DerivedFrom
+{
+	static void Constraints(TDerived* derived)
+	{
+		// Checks if TDerived* can be implicitly cast to TBase*
+		// If at compile time the cast is successful, that means that TDerived is really derived from TBase
+		TBase* base = derived; 
+	}
+
+	DerivedFrom()
+	{
+		// In the constructor by assigning a function pointer, we trigger the check of the constraints
+		void(*func)(TDerived*) = &Constraints;
+	}
+};
+
+template <typename TPerson>
+void PrintNameOfPerson(TPerson object)
+{
+	DerivedFrom<TPerson, Person> isTPersonDerivedFromPerson; // This triggers the check if TPerson is derived from Person
+
+	cout << object.GetName() << endl;
+}
+
 int main()
 {
+	// --- Some operations with the Table class ---
 	srand(time(0));
 
 	Table<int>* table = new Table<int>(5, 10);
@@ -73,4 +103,14 @@ int main()
 	}
 
 	delete table;
+
+	// --- Template constraints ---
+	Person person("Denis Rizov");
+	Student student("Chris Rizov");
+
+	PrintNameOfPerson(person);
+	PrintNameOfPerson(student);
+
+	int number = 9;
+	//PrintNameOfPerson(number); // This line does not compile, because "int" is not derived from "Person"
 }
