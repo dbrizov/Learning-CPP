@@ -15,6 +15,15 @@ String::String(const String& str)
 	this->Create(str.data);
 }
 
+String::String(String&& str)
+{
+	this->data = str.data;
+	this->length = str.length;
+
+	str.data = nullptr;
+	str.length = 0;
+}
+
 String::~String()
 {
 	this->Delete();
@@ -27,6 +36,17 @@ String& String::operator=(const String& str)
 		this->Delete();
 		this->Create(str.data);
 	}
+
+	return *this;
+}
+
+String& String::operator=(String&& str)
+{
+	this->data = str.data;
+	this->length = str.length;
+
+	str.data = nullptr;
+	str.length = 0;
 
 	return *this;
 }

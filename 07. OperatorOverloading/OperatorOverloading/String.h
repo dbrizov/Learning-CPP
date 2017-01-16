@@ -11,9 +11,11 @@ public:
 	String();
 	String(const char* cstr);
 	String(const String& str);
+	String(String&& str);
 	~String();
 
 	String& operator=(const String& str);
+	String& operator=(String&& str);
 	char& operator[](int index);
 
 	int Length();
