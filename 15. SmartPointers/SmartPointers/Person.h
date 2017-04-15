@@ -9,6 +9,7 @@ using std::weak_ptr;
 class Person
 {
 public:
+	Person();
 	Person(string name);
 	~Person();
 

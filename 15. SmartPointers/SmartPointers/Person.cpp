@@ -4,6 +4,12 @@
 using std::cout;
 using std::endl;
 
+Person::Person()
+{
+	cout << "Person Created: " << "Default Name" << endl;
+	this->name = "Default Name";
+}
+
 Person::Person(string name)
 {
 	cout << "Person Created: " << name << endl;
